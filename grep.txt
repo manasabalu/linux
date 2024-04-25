@@ -1,0 +1,45 @@
+Using grep:-
+---------------
+grep is a command which uses regular expression to isolate matching data. The basic usage of grep is to provide a regular expression and a file on which the regular expression should be matched.
+Syntax:-
+ grep [OPTIONS] PATTERN [FILE...]
+
+Note:- because regular expression often contain shell metacharacters such as $ , * and others, it is recommended practice to use single quotes (') to encapsulate the regular expression on the command line.
+grep can be used in conjunction with other command using a | 
+examples:-
+	grep 'cat$' /usr/share/dict/words
+	who | grep ^student
+grep Options:-
+-------------------
+grep has many useful options for adjusting how it uses the provided regular expression with data:
+
+Option		Function
+--------------------------------------------------------------------------------------------------------------------------------------
+-i		Use the regular expression provided; however do not enforce case sensitivity
+-v		Only display lines that do not contain matches to the regular expression
+-r 		Search for data matching the regular expression recursively to a group of files or dirs
+-A  <Number>	Display <Number> of lines afterthe regular expression match
+-B <Number>	Display <Number> of line before the regular expression match
+-e 		with multiple -e options used, multiple regular exprpessions can be supplied and will be used with a logical OR
+
+
+Examples:-
+1. Search for a word called 'system' in practice.txt
+   grep -w system practice.txt
+2. Search for the lines that start with work 'system'
+   grep -w ^system practice.txt
+3. Search for lines that ends with given word 'sandya'
+   grep -w "sandya$" practice1.txt
+Inverting the pattern match : You can display the lines that are not matched with the specified search sting pattern using the -v option
+4. grep -i -w -n  -v '^abc$1234'  practice1.txt
+Display the file names that matches the pattern : We can just display the files that contains the given string/pattern.
+5.grep  -l sandya  *.txt
+6.print only a count of the lines that match a pattern
+who | grep -w ^vijai | wc -l
+or
+who | grep -w -c  ^vijai
+wehre -c : count
+7.Specify expression with -e option. Can use multiple times
+who | grep -e muktha -e vijai
+8.Print only directories on the screen
+ls -l | grep ^d
